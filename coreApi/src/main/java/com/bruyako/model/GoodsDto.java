@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 /**
  * Created by brunyatko on 03.02.16.
  */
-public class GoodDto implements Serializable {
+public class GoodsDto implements Serializable {
 
     private int good_id;
     private String name;
@@ -39,12 +39,12 @@ public class GoodDto implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GoodDto)) return false;
+        if (!(o instanceof GoodsDto)) return false;
 
-        GoodDto goodDto = (GoodDto) o;
+        GoodsDto goodsDto = (GoodsDto) o;
 
-        if (!name.equals(goodDto.name)) return false;
-        if (!price.equals(goodDto.price)) return false;
+        if (!name.equals(goodsDto.name)) return false;
+        if (!price.equals(goodsDto.price)) return false;
 
         return true;
     }
@@ -58,7 +58,7 @@ public class GoodDto implements Serializable {
 
     @Override
     public String toString() {
-        return "Good{" +
+        return "Goods{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
                 '}';

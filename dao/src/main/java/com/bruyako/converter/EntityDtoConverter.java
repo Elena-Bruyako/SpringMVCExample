@@ -1,7 +1,7 @@
 package com.bruyako.converter;
 
-import com.bruyako.entity.Good;
-import com.bruyako.model.GoodDto;
+import com.bruyako.entity.Goods;
+import com.bruyako.model.GoodsDto;
 
 /**
  * Created by brunyatko on 03.02.16.
@@ -11,29 +11,29 @@ public class EntityDtoConverter {
     private EntityDtoConverter() {
     }
 
-    public static Good convert(GoodDto goodDto) {
+    public static Goods convert(GoodsDto goodsDto) {
 
-        if (goodDto == null) {
+        if (goodsDto == null) {
             return null;
         }
-        Good good = new Good();
-        good.setGood_id(goodDto.getGood_id());
-        good.setName(goodDto.getName());
-        good.setPrice(goodDto.getPrice());
-        return good;
+        Goods goods = new Goods();
+        goods.setGood_id(goodsDto.getGood_id());
+        goods.setName(goodsDto.getName());
+        goods.setPrice(goodsDto.getPrice());
+        return goods;
     }
 
-    public static GoodDto convert(Good good) {
+    public static GoodsDto convert(Goods goods) {
 
-        if (good == null) {
+        if (goods == null) {
             return null;
         }
 
-        GoodDto goodDto = new GoodDto();
-        goodDto.setGood_id(good.getGood_id());
-        goodDto.setName(good.getName());
-        goodDto.setPrice(good.getPrice());
+        GoodsDto goodsDto = new GoodsDto();
+        goodsDto.setGood_id(goods.getGood_id());
+        goodsDto.setName(goods.getName());
+        goodsDto.setPrice(goods.getPrice());
 
-        return goodDto;
+        return goodsDto;
     }
 }

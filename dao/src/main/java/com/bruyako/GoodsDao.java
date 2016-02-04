@@ -8,8 +8,9 @@ import java.util.List;
 /**
  * Created by brunyatko on 03.02.16.
  */
-public interface MarketService {
+public interface GoodsDao extends AbstractDao<GoodsDto, Integer>{
 
     List<GoodsDto> getAll();
     List<GoodsDto> getByFilter(GoodsFilter goodsFilter);
+    List<GoodsDto> getByName(String name);
 }

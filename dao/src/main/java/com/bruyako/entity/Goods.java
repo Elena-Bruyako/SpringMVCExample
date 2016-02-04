@@ -7,19 +7,21 @@ import java.math.BigDecimal;
  * Created by brunyatko on 03.02.16.
  */
 @Entity
-@Table(name = "Good")
-public class Good {
+@Table(name = "Goods")
+public class Goods {
 
     @Id
     @Column(name = "Good_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int good_id;
+
     @Column(name = "Name")
     private String name;
+
     @Column(name = "Price")
     private BigDecimal price;
 
-    public Good() {
+    public Goods() {
     }
 
     public int getGood_id() {
@@ -49,11 +51,11 @@ public class Good {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Good)) return false;
+        if (!(o instanceof Goods)) return false;
 
-        Good good = (Good) o;
+        Goods goods = (Goods) o;
 
-        if (good_id != good.good_id) return false;
+        if (good_id != goods.good_id) return false;
 
         return true;
     }
@@ -65,7 +67,7 @@ public class Good {
 
     @Override
     public String toString() {
-        return "Good{" +
+        return "Goods{" +
                 "good_id=" + good_id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
