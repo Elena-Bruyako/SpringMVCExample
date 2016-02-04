@@ -1,7 +1,6 @@
 package com.bruyako.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * Created by brunyatko on 03.02.16.
@@ -10,7 +9,7 @@ public class GoodsDto implements Serializable {
 
     private int good_id;
     private String name;
-    private BigDecimal price;
+    private int price;
 
     public int getGood_id() {
         return good_id;
@@ -28,11 +27,11 @@ public class GoodsDto implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -43,16 +42,16 @@ public class GoodsDto implements Serializable {
 
         GoodsDto goodsDto = (GoodsDto) o;
 
-        if (!name.equals(goodsDto.name)) return false;
-        if (!price.equals(goodsDto.price)) return false;
+        if (price != goodsDto.price) return false;
+        if (name != null ? !name.equals(goodsDto.name) : goodsDto.name != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + price.hashCode();
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + price;
         return result;
     }
 

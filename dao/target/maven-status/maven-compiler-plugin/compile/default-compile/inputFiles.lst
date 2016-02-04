@@ -1,5 +1,5 @@
-/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/AbstractDao.java
-/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/GoodDao.java
-/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/converter/EntityDtoConverter.java
-/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/impl/GoodDaoImpl.java
-/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/entity/Good.java
+/home/brunyatko/Workspace/Projects/TestMarketApp/dao/src/main/java/com/bruyako/impl/GoodsDaoImpl.java
+/home/brunyatko/Workspace/Projects/TestMarketApp/dao/src/main/java/com/bruyako/converter/EntityDtoConverter.java
+/home/brunyatko/Workspace/Projects/TestMarketApp/dao/src/main/java/com/bruyako/AbstractDao.java
+/home/brunyatko/Workspace/Projects/TestMarketApp/dao/src/main/java/com/bruyako/GoodsDao.java
+/home/brunyatko/Workspace/Projects/TestMarketApp/dao/src/main/java/com/bruyako/entity/Goods.java

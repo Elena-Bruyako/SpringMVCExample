@@ -29,7 +29,7 @@ public class GoodsDaoImpl implements GoodsDao {
     public List<GoodsDto> getAll() {
 
         List<Goods> goods = sessionFactory.getCurrentSession().createQuery("select g from Goods g").list();
-        List<GoodsDto> result = new ArrayList<GoodsDto>(goods.size());
+        List<GoodsDto> result = new ArrayList<>(goods.size());
 
         for (Goods good : goods) {
             result.add(EntityDtoConverter.convert(good));
@@ -41,32 +41,28 @@ public class GoodsDaoImpl implements GoodsDao {
     public List<GoodsDto> getByFilter(GoodsFilter goodsFilter) {
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Goods.class);
-        if (goodsFilter.getPriceFrom() != null) {
+        if (goodsFilter.getPriceFrom() != 0) {
             criteria.add(Restrictions.gt("price", goodsFilter.getPriceFrom()));
         }
-        if (goodsFilter.getPriceTo() != null) {
+        if (goodsFilter.getPriceTo() != 0) {
             criteria.add(Restrictions.lt("price", goodsFilter.getPriceTo()));
         }
-
+        if (goodsFilter.getName() != null) {
+            String name = goodsFilter.getName();
+            criteria.add(Restrictions.like("name", "%" + name + "%"));
+        }
         List<Goods> goodsList = criteria.list();
         List<GoodsDto> result = new ArrayList<>(goodsList.size());
 
         for (Goods goods : goodsList) {
             result.add(EntityDtoConverter.convert(goods));
         }
-        return result;
-    }
-
-    @Override
-    public List<GoodsDto> getByName(String name) {
-
-        List<Goods> goodsList = sessionFactory.getCurrentSession().createQuery("select g from Goods g where g.name like :name").setParameter("name", "%" + name + "%").list();
-        List<GoodsDto> result = new ArrayList<>(goodsList.size());
-        for (Goods goods : goodsList) {
-            result.add(EntityDtoConverter.convert(goods));
+        if (result.isEmpty()) {
+            System.out.println("Goods not found");
         }
         return result;
     }
+
 
     @Transactional(readOnly = false)
     @Override
@@ -76,9 +72,12 @@ public class GoodsDaoImpl implements GoodsDao {
         sessionFactory.getCurrentSession().save(goods);
     }
 
+    @Transactional(readOnly = false)
     @Override
-    public GoodsDto update(GoodsDto goodsDto) {
-        return null;
+    public void update(GoodsDto goodsDto) {
+
+        Goods goods = EntityDtoConverter.convert(goodsDto);
+        sessionFactory.getCurrentSession().update(goods);
     }
 
     @Override

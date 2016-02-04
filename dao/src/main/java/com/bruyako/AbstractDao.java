@@ -6,7 +6,7 @@ package com.bruyako;
 public interface AbstractDao<T, P> {
 
     void create(T t);
-    T update(T t);
+    void update(T t);
     void delete(P p);
 
 }

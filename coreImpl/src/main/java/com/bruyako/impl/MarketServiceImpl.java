@@ -20,6 +20,10 @@ public class MarketServiceImpl implements MarketService{
     @Autowired
     private GoodsDao goodsDao;
 
+    public void setDao(GoodsDao goodsDao) {
+        this.goodsDao = goodsDao;
+    }
+
     @Override
     public List<GoodsDto> getAll() {
 

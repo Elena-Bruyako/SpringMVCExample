@@ -1,2 +1,3 @@
-/home/brunyatko/Workspace/Projects/Market/coreApi/src/main/java/com/bruyako/model/GoodDto.java
-/home/brunyatko/Workspace/Projects/Market/coreApi/src/main/java/com/bruyako/MarketService.java
+/home/brunyatko/Workspace/Projects/TestMarketApp/coreApi/src/main/java/com/bruyako/model/GoodsDto.java
+/home/brunyatko/Workspace/Projects/TestMarketApp/coreApi/src/main/java/com/bruyako/MarketService.java
+/home/brunyatko/Workspace/Projects/TestMarketApp/coreApi/src/main/java/com/bruyako/model/GoodsFilter.java

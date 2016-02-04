@@ -1,5 +1,5 @@
+com/bruyako/GoodsDao.class
+com/bruyako/impl/GoodsDaoImpl.class
 com/bruyako/AbstractDao.class
-com/bruyako/entity/Good.class
-com/bruyako/GoodDao.class
-com/bruyako/impl/GoodDaoImpl.class
+com/bruyako/entity/Goods.class
 com/bruyako/converter/EntityDtoConverter.class

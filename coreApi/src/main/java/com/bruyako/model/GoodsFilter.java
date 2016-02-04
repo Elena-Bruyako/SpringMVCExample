@@ -1,29 +1,37 @@
 package com.bruyako.model;
 
-import java.math.BigDecimal;
 
 /**
  * Created by brunyatko on 04.02.16.
  */
 public class GoodsFilter {
 
-    private BigDecimal priceFrom;
-    private BigDecimal priceTo;
+    private int priceFrom;
+    private int priceTo;
+    private String name;
 
-    public BigDecimal getPriceFrom() {
+    public int getPriceFrom() {
         return priceFrom;
     }
 
-    public void setPriceFrom(BigDecimal priceFrom) {
+    public void setPriceFrom(int priceFrom) {
         this.priceFrom = priceFrom;
     }
 
-    public BigDecimal getPriceTo() {
+    public int getPriceTo() {
         return priceTo;
     }
 
-    public void setPriceTo(BigDecimal priceTo) {
+    public void setPriceTo(int priceTo) {
         this.priceTo = priceTo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

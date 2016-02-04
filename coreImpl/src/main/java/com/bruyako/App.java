@@ -12,6 +12,6 @@ public class App {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         GoodsDao goodsDao = context.getBean(GoodsDao.class);
-        System.out.println(goodsDao.getByName("i"));
+        System.out.println(goodsDao.getAll());
     }
 }
