@@ -1,0 +1,5 @@
+/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/AbstractDao.java
+/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/GoodDao.java
+/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/converter/EntityDtoConverter.java
+/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/impl/GoodDaoImpl.java
+/home/brunyatko/Workspace/Projects/Market/dao/src/main/java/com/bruyako/entity/Good.java
