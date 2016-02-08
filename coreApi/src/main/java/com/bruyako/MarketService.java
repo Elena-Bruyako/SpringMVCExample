@@ -12,4 +12,7 @@ public interface MarketService {
 
     List<GoodsDto> getAll();
     List<GoodsDto> getByFilter(GoodsFilter goodsFilter);
+    public void create(GoodsDto goodsDto);
+    public void update(GoodsDto goodsDto);
+    public void delete(Integer id);
 }

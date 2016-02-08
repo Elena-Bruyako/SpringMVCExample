@@ -26,6 +26,7 @@
         <property name="packagesToScan">
             <array>
                 <value>com.bruyako.entity</value>
+                <value>com.bruyako.converter</value>
             </array>
         </property>
         <property name="hibernateProperties">

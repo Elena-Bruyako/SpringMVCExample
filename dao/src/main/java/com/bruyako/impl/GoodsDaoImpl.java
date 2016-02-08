@@ -63,7 +63,6 @@ public class GoodsDaoImpl implements GoodsDao {
         return result;
     }
 
-
     @Transactional(readOnly = false)
     @Override
     public void create(GoodsDto goodsDto) {

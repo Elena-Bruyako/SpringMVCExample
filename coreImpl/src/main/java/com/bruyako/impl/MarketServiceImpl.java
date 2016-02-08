@@ -34,4 +34,21 @@ public class MarketServiceImpl implements MarketService{
     public List<GoodsDto> getByFilter(GoodsFilter goodsFilter) {
         return goodsDao.getByFilter(goodsFilter);
     }
+
+    @Override
+    public void create(GoodsDto goodsDto) {
+        goodsDao.create(goodsDto);
+    }
+
+    @Override
+    public void update(GoodsDto goodsDto) {
+        goodsDao.update(goodsDto);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        goodsDao.delete(id);
+    }
+
+
 }
