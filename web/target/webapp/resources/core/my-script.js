@@ -37,6 +37,7 @@ $(document).ready(function(){
             processData: false,
             data: JSON.stringify({"good_id": good_id, "name": name, "price": price}),
             success: function(data) {
+                var data = {good_id: good_id, name: name, price: price};
                 $('#main-table').append(getRow(data));
             },
             error: function (req, message) {
@@ -62,8 +63,9 @@ $(document).ready(function(){
                 $row.find('.name').val(updatedData.name);
                 $row.find('.price').val(updatedData.price);
             },
-            error: function () {
-
+            error: function (req, message) {
+                var data = {good_id: good_id, name: editNewName, price: editNewPrice};
+                $('#main-table').append(getRow(data));
             }
         });
         $('#requestModal').modal('toggle');

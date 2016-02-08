@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by brunyatko on 04.02.16.
  */
@@ -26,13 +28,11 @@ public class MainController {
     }
 
     @RequestMapping(value = "/addNewGoods", method = RequestMethod.POST)
-    public String addNewGoods(@RequestBody GoodsDto goodsDto, Model model) {
-
-//        model.addAttribute(service.create(goodsDto));
+    public @ResponseBody List<GoodsDto> addNewGoods(@RequestBody GoodsDto goodsDto) {
 
         service.create(goodsDto);
 
-        return "redirect:/market";
+        return service.getAll();
     }
 
     @RequestMapping(value = "/delete/{good_id}",  method = RequestMethod.GET)
@@ -45,12 +45,11 @@ public class MainController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@RequestBody GoodsDto goodsDto, Model model){
+    public @ResponseBody List<GoodsDto> update(@RequestBody GoodsDto goodsDto){
 
         service.update(goodsDto);
-        model.addAttribute("allGoods", service.getAll());
 
-        return "redirect:/market";
+        return service.getAll();
     }
 
 }
