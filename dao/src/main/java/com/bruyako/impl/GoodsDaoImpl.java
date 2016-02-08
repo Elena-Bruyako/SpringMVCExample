@@ -71,12 +71,12 @@ public class GoodsDaoImpl implements GoodsDao {
         sessionFactory.getCurrentSession().save(goods);
     }
 
-    @Transactional(readOnly = false)
+
     @Override
     public void update(GoodsDto goodsDto) {
 
         Goods goods = EntityDtoConverter.convert(goodsDto);
-        sessionFactory.getCurrentSession().update(goods);
+        sessionFactory.getCurrentSession().saveOrUpdate(goods);
     }
 
     @Override
