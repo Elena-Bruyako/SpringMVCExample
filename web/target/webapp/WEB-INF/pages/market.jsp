@@ -19,11 +19,13 @@
 
 <div class="header"></div>
 <div class="tableContainer">
-    <div class="tableRow"></div>`
+    <div class="tableRow">
+        <div class="filter"></div>
         <div class="main">
-            <table class="table table-bordered">
+            <table id="main-table" class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Edit/Delete</th>
@@ -31,11 +33,12 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${allGoods}" var="goods">
-                    <tr>
-                        <td>${goods.name}</td>
-                        <td>${goods.price}</td>
+                    <tr id="good-${goods.good_id}">
+                        <td class="good_id">${goods.good_id}</td>
+                        <td class="name">${goods.name}</td>
+                        <td class="price">${goods.price}</td>
                         <td>
-                            <button class="btn btn-default" data-toggle="modal" data-target="#requestModal">Edit</button>
+                            <button class="btn btn-default edit" data-toggle="modal" data-target="#requestModal">Edit</button>
                             <a href="delete/${goods.good_id}">Delete</a>
                         </td>
                     </tr>
@@ -52,6 +55,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="form">
+                                <input id="newId" name="newId" type="hidden" value=""/>
                                 <div class="form-group">
                                     <label for="editName">Name</label>
                                     <input type="text" class="form-control" id="editName"
@@ -74,7 +78,7 @@
         </div>
         <div class="sidebar">
             <h3>Form adding a new goods</h3>
-            <form action="/addNewGoods" method="post">
+            <form action="addNewGoods" method="post">
                 <label for="newName">Name goods:</label>
                 <input type="text" class="form-control" id="newName" placeholder="Name">
                 <br>
@@ -86,7 +90,6 @@
         </div>
     </div>
 </div>
-<div class="footer"></div>
 
 </body>
 
