@@ -1,10 +1,13 @@
 package com.bruyako;
 
 import com.bruyako.model.GoodsDto;
+import com.bruyako.model.GoodsFilterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by brunyatko on 04.02.16.
@@ -23,12 +26,21 @@ public class MainController {
         return "market";
     }
 
-//    @RequestMapping(value = "/getByFilter", method = RequestMethod.POST)
-//    public String getByFilter(@RequestBody GoodsFilter goodsFilter, Model model) {
-//
-//        model.addAttribute("allGoods", service.getByFilter(goodsFilter));
-//        return "goodsList";
-//    }
+
+    @RequestMapping(value = "/getByFilter/{priceFrom}/{priceTo}/{name}", method = RequestMethod.GET)
+    public String getByFilter(@PathVariable int priceFrom, @PathVariable int priceTo, @PathVariable String name, Model model) {
+
+        List<GoodsDto> filterResult = service.getByFilter(priceFrom, priceTo, name);
+        model.addAttribute("allGoods", filterResult);
+        return "goodsList";
+    }
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public String getByFilter(Model model) {
+
+        model.addAttribute("allGoods", service.getAll());
+        return "goodsList";
+    }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addNewGoods(@RequestBody GoodsDto goodsDto, Model model) {

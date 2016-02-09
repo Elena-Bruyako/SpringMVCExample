@@ -3,7 +3,6 @@ package com.bruyako.impl;
 import com.bruyako.GoodsDao;
 import com.bruyako.MarketService;
 import com.bruyako.model.GoodsDto;
-import com.bruyako.model.GoodsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +30,8 @@ public class MarketServiceImpl implements MarketService{
     }
 
     @Override
-    public List<GoodsDto> getByFilter(GoodsFilter goodsFilter) {
-        return goodsDao.getByFilter(goodsFilter);
+    public List<GoodsDto> getByFilter(int priceFrom, int priceTo, String name) {
+        return goodsDao.getByFilter(priceFrom, priceTo, name);
     }
 
     @Override

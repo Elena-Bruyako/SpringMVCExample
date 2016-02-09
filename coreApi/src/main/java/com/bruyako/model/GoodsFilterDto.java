@@ -4,7 +4,7 @@ package com.bruyako.model;
 /**
  * Created by brunyatko on 04.02.16.
  */
-public class GoodsFilter {
+public class GoodsFilterDto {
 
     private int priceFrom;
     private int priceTo;

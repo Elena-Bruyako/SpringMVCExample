@@ -4,7 +4,6 @@ import com.bruyako.GoodsDao;
 import com.bruyako.converter.EntityDtoConverter;
 import com.bruyako.entity.Goods;
 import com.bruyako.model.GoodsDto;
-import com.bruyako.model.GoodsFilter;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -38,17 +37,16 @@ public class GoodsDaoImpl implements GoodsDao {
     }
 
     @Override
-    public List<GoodsDto> getByFilter(GoodsFilter goodsFilter) {
+    public List<GoodsDto> getByFilter(int priceFrom, int priceTo, String name) {
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Goods.class);
-        if (goodsFilter.getPriceFrom() != 0) {
-            criteria.add(Restrictions.ge("price", goodsFilter.getPriceFrom()));
+        if (priceFrom != 0) {
+            criteria.add(Restrictions.ge("price", priceFrom));
         }
-        if (goodsFilter.getPriceTo() != 0) {
-            criteria.add(Restrictions.le("price", goodsFilter.getPriceTo()));
+        if (priceTo != 0) {
+            criteria.add(Restrictions.le("price", priceTo));
         }
-        if (goodsFilter.getName() != null) {
-            String name = goodsFilter.getName();
+        if (name != null) {
             criteria.add(Restrictions.like("name", "%" + name + "%"));
         }
         List<Goods> goodsList = criteria.list();

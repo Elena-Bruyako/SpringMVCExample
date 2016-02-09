@@ -32,6 +32,7 @@
                 <input type="text" class="form-control" id="selectName" placeholder="Name">
                 <br>
                 <button type="button" class="btn btn-primary" id="getByFilter">Select</button>
+                <button type="button" class="btn btn-primary" id="resetFilter">Reset</button>
             </form>
         </div>
         <div class="main">

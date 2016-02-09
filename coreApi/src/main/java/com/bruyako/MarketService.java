@@ -1,7 +1,6 @@
 package com.bruyako;
 
 import com.bruyako.model.GoodsDto;
-import com.bruyako.model.GoodsFilter;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
 public interface MarketService {
 
     List<GoodsDto> getAll();
-    List<GoodsDto> getByFilter(GoodsFilter goodsFilter);
+    List<GoodsDto> getByFilter(int priceFrom, int priceTo, String name);
     public void create(GoodsDto goodsDto);
     public void update(GoodsDto goodsDto);
     public void delete(Integer id);
