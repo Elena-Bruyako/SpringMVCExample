@@ -31,19 +31,24 @@
                         <th>Edit/Delete</th>
                     </tr>
                 </thead>
-                <tbody>
-                <c:forEach items="${allGoods}" var="goods">
-                    <tr id="good-${goods.good_id}">
-                        <td class="good_id">${goods.good_id}</td>
-                        <td class="name">${goods.name}</td>
-                        <td class="price">${goods.price}</td>
-                        <td>
-                            <button class="btn btn-default edit" data-toggle="modal" data-target="#requestModal">Edit</button>
-                            <a href="delete/${goods.good_id}">Delete</a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                <tbody id="tableBody">
+                    <jsp:include page="goodsList.jsp"/>
+                </tbody>
             </table>
+                <%----%>
+                <%--<tbody>--%>
+                <%--<c:forEach items="${allGoods}" var="goods">--%>
+                    <%--<tr id="good-${goods.good_id}">--%>
+                        <%--<td class="good_id">${goods.good_id}</td>--%>
+                        <%--<td class="name">${goods.name}</td>--%>
+                        <%--<td class="price">${goods.price}</td>--%>
+                        <%--<td>--%>
+                            <%--<button class="btn btn-default edit" data-toggle="modal" data-target="#requestModal">Edit</button>--%>
+                            <%--<a href="delete/${goods.good_id}">Delete</a>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
+                <%--</c:forEach>--%>
+            <%--</table>--%>
             <div class="modal fade" id="requestModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -57,14 +62,14 @@
                             <div class="form">
                                 <input id="newId" name="newId" type="hidden" value=""/>
                                 <div class="form-group">
-                                    <label for="editName">Name</label>
+                                    <label for="editName">Name:</label>
                                     <input type="text" class="form-control" id="editName"
-                                           placeholder="Name">
+                                           value="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="editPrice">Price</label>
+                                    <label for="editPrice">Price:</label>
                                     <input type="number" class="form-control" id="editPrice"
-                                           placeholder="Price">
+                                           value="">
                                 </div>
                             </div>
                         </div>

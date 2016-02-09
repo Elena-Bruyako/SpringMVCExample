@@ -1,7 +1,6 @@
 package com.bruyako;
 
 import com.bruyako.model.GoodsDto;
-import com.bruyako.model.GoodsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,28 +27,39 @@ public class MainController {
     }
 
     @RequestMapping(value = "/addNewGoods", method = RequestMethod.POST)
-    public @ResponseBody List<GoodsDto> addNewGoods(@RequestBody GoodsDto goodsDto) {
+    public String addNewGoods(@RequestBody GoodsDto goodsDto, Model model) {
 
         service.create(goodsDto);
+        model.addAttribute("allGoods", service.getAll());
 
-        return service.getAll();
+        return "goodsList";
     }
 
-    @RequestMapping(value = "/delete/{good_id}",  method = RequestMethod.GET)
+//    @RequestMapping(value = "/addNewGoods", method = RequestMethod.POST)
+//    public @ResponseBody List<GoodsDto> addNewGoods(@RequestBody GoodsDto goodsDto) {
+//
+//        service.create(goodsDto);
+//
+//        return service.getAll();
+//    }
+
+    @RequestMapping(value = "/delete/{good_id}",  method = RequestMethod.DELETE)
     public String deleteGoods(@PathVariable("good_id") int good_id, Model model) {
 
         service.delete(good_id);
         model.addAttribute("allGoods", service.getAll());
 
-        return "redirect:/market";
+        return "goodsList";
     }
 
+
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public @ResponseBody List<GoodsDto> update(@RequestBody GoodsDto goodsDto){
+    public String update(@RequestBody GoodsDto goodsDto, Model model) {
 
         service.update(goodsDto);
+        model.addAttribute("allGoods", service.getAll());
 
-        return service.getAll();
+        return "goodsList";
     }
 
 }
