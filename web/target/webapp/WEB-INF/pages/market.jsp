@@ -17,10 +17,24 @@
 </head>
 <body>
 
-<div class="header"></div>
+<%--<div class="header"></div>--%>
 <div class="tableContainer">
     <div class="tableRow">
-        <div class="filter"></div>
+        <div class="filter">
+            <h3>Choose Price or Name:</h3>
+            <form>
+                <label for="priceFrom">Price from:</label>
+                <input type="number" class="form-control" id="priceFrom" placeholder="Price from">
+                <br>
+                <label for="priceTo">Price to:</label>
+                <input type="number" class="form-control" id="priceTo" placeholder="Price to">
+                <br>
+                <label for="selectName">Name:</label>
+                <input type="text" class="form-control" id="selectName" placeholder="Name">
+                <br>
+                <button type="button" class="btn btn-primary" id="getByFilter">Select</button>
+            </form>
+        </div>
         <div class="main">
             <table id="main-table" class="table table-bordered">
                 <thead>
@@ -87,7 +101,7 @@
                 <label for="newName">Name goods:</label>
                 <input type="text" class="form-control" id="newName" placeholder="Name">
                 <br>
-                <label for="newPrice">Price:</label><br>
+                <label for="newPrice">Price:</label>
                 <input type="number" class="form-control" id="newPrice" placeholder="Price">
                 <br>
                 <button type="button" class="btn btn-primary" id="addNewGoods">Add</button>

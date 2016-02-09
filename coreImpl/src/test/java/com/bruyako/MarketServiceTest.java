@@ -61,16 +61,29 @@ public class MarketServiceTest {
         int counter = 0;
         for (GoodsDto goodsDto : result) {
             counter++;
-
         }
         assertEquals(3, counter);
     }
 
     @Test
-    public void testGetByFilter() throws Exception {
+    public void testCreate() throws Exception {
 
+        service.create(goodsDtoOne);
+        verify(goodsDaoImpl, times(1)).create(goodsDtoOne);
+    }
 
+    @Test
+    public void testDelete() throws Exception {
 
+        service.delete(1);
+        verify(goodsDaoImpl, times(1)).delete(1);
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+
+        service.update(goodsDtoOne);
+        verify(goodsDaoImpl, times(1)).update(goodsDtoOne);
     }
 
 }

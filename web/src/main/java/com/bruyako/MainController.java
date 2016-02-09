@@ -1,12 +1,11 @@
 package com.bruyako;
 
 import com.bruyako.model.GoodsDto;
+import com.bruyako.model.GoodsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Created by brunyatko on 04.02.16.
@@ -22,8 +21,14 @@ public class MainController {
     public String getMarket(Model model) {
 
         model.addAttribute("allGoods", service.getAll());
-
         return "market";
+    }
+
+    @RequestMapping(value = "/getByFilter", method = RequestMethod.POST)
+    public String getByFilter(@RequestBody GoodsFilter goodsFilter, Model model) {
+
+        model.addAttribute("allGoods", service.getByFilter(goodsFilter));
+        return "goodsList";
     }
 
     @RequestMapping(value = "/addNewGoods", method = RequestMethod.POST)
@@ -31,7 +36,6 @@ public class MainController {
 
         service.create(goodsDto);
         model.addAttribute("allGoods", service.getAll());
-
         return "goodsList";
     }
 
@@ -43,12 +47,11 @@ public class MainController {
 //        return service.getAll();
 //    }
 
-    @RequestMapping(value = "/delete/{good_id}",  method = RequestMethod.DELETE)
-    public String deleteGoods(@PathVariable("good_id") int good_id, Model model) {
+    @RequestMapping(value = "/delete",  method = RequestMethod.DELETE)
+    public String deleteGoods(@RequestBody GoodsDto goodsDto, Model model) {
 
-        service.delete(good_id);
+        service.delete(goodsDto.getGood_id());
         model.addAttribute("allGoods", service.getAll());
-
         return "goodsList";
     }
 
@@ -58,8 +61,6 @@ public class MainController {
 
         service.update(goodsDto);
         model.addAttribute("allGoods", service.getAll());
-
         return "goodsList";
     }
-
 }

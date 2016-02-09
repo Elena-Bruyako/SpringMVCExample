@@ -15,7 +15,8 @@
         <td class="price">${goods.price}</td>
         <td>
             <button class="btn btn-default edit" data-toggle="modal" data-target="#requestModal">Edit</button>
-            <a id="delete" href="delete/${goods.good_id}">Delete</a>
+            <button type="button" class="btn btn-default" id="delete">Delete</button>
+            <%--<a href="delete/${goods.good_id}">Delete</a>--%>
         </td>
     </tr>
 </c:forEach>

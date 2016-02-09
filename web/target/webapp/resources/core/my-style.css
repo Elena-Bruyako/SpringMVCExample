@@ -9,7 +9,8 @@ div .tableRow {
 
 .filter {
     display: table-cell;
-    width: 200px;
+    width: 250px;
+    padding: 15px;
     vertical-align: top;
     background: #D3D3D3;
 }
@@ -18,7 +19,7 @@ div .tableRow {
     display: table-cell;
     vertical-align: top;
     padding: 15px;
-    width: 350px;
+    width: 450px;
     background: #F5F5F5;
 }
 
@@ -26,6 +27,6 @@ div .tableRow {
     display: table-cell;
     vertical-align: top;
     padding: 15px;
-    width: 200px;
+    width: 250px;
     background: #D3D3D3;
 }

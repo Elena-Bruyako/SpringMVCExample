@@ -42,10 +42,10 @@ public class GoodsDaoImpl implements GoodsDao {
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Goods.class);
         if (goodsFilter.getPriceFrom() != 0) {
-            criteria.add(Restrictions.gt("price", goodsFilter.getPriceFrom()));
+            criteria.add(Restrictions.ge("price", goodsFilter.getPriceFrom()));
         }
         if (goodsFilter.getPriceTo() != 0) {
-            criteria.add(Restrictions.lt("price", goodsFilter.getPriceTo()));
+            criteria.add(Restrictions.le("price", goodsFilter.getPriceTo()));
         }
         if (goodsFilter.getName() != null) {
             String name = goodsFilter.getName();
