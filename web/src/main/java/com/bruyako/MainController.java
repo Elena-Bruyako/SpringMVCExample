@@ -1,7 +1,6 @@
 package com.bruyako;
 
 import com.bruyako.model.GoodsDto;
-import com.bruyako.model.GoodsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +23,14 @@ public class MainController {
         return "market";
     }
 
-    @RequestMapping(value = "/getByFilter", method = RequestMethod.POST)
-    public String getByFilter(@RequestBody GoodsFilter goodsFilter, Model model) {
+//    @RequestMapping(value = "/getByFilter", method = RequestMethod.POST)
+//    public String getByFilter(@RequestBody GoodsFilter goodsFilter, Model model) {
+//
+//        model.addAttribute("allGoods", service.getByFilter(goodsFilter));
+//        return "goodsList";
+//    }
 
-        model.addAttribute("allGoods", service.getByFilter(goodsFilter));
-        return "goodsList";
-    }
-
-    @RequestMapping(value = "/addNewGoods", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addNewGoods(@RequestBody GoodsDto goodsDto, Model model) {
 
         service.create(goodsDto);
@@ -39,18 +38,10 @@ public class MainController {
         return "goodsList";
     }
 
-//    @RequestMapping(value = "/addNewGoods", method = RequestMethod.POST)
-//    public @ResponseBody List<GoodsDto> addNewGoods(@RequestBody GoodsDto goodsDto) {
-//
-//        service.create(goodsDto);
-//
-//        return service.getAll();
-//    }
-
-    @RequestMapping(value = "/delete",  method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete",  method = RequestMethod.POST)
     public String deleteGoods(@RequestBody GoodsDto goodsDto, Model model) {
 
-        service.delete(goodsDto.getGood_id());
+        service.delete(goodsDto.getGoodId());
         model.addAttribute("allGoods", service.getAll());
         return "goodsList";
     }

@@ -17,7 +17,6 @@
 </head>
 <body>
 
-<%--<div class="header"></div>--%>
 <div class="tableContainer">
     <div class="tableRow">
         <div class="filter">
@@ -49,62 +48,20 @@
                     <jsp:include page="goodsList.jsp"/>
                 </tbody>
             </table>
-                <%----%>
-                <%--<tbody>--%>
-                <%--<c:forEach items="${allGoods}" var="goods">--%>
-                    <%--<tr id="good-${goods.good_id}">--%>
-                        <%--<td class="good_id">${goods.good_id}</td>--%>
-                        <%--<td class="name">${goods.name}</td>--%>
-                        <%--<td class="price">${goods.price}</td>--%>
-                        <%--<td>--%>
-                            <%--<button class="btn btn-default edit" data-toggle="modal" data-target="#requestModal">Edit</button>--%>
-                            <%--<a href="delete/${goods.good_id}">Delete</a>--%>
-                        <%--</td>--%>
-                    <%--</tr>--%>
-                <%--</c:forEach>--%>
-            <%--</table>--%>
-            <div class="modal fade" id="requestModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">Please, fill all fields</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form">
-                                <input id="newId" name="newId" type="hidden" value=""/>
-                                <div class="form-group">
-                                    <label for="editName">Name:</label>
-                                    <input type="text" class="form-control" id="editName"
-                                           value="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="editPrice">Price:</label>
-                                    <input type="number" class="form-control" id="editPrice"
-                                           value="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="update">Edit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="sidebar">
             <h3>Form adding a new goods</h3>
-            <form action="addNewGoods" method="post">
+            <form id="editForm">
                 <label for="newName">Name goods:</label>
                 <input type="text" class="form-control" id="newName" placeholder="Name">
                 <br>
                 <label for="newPrice">Price:</label>
                 <input type="number" class="form-control" id="newPrice" placeholder="Price">
+                <input type="hidden" class="form-control" id="newGoodId" placeholder="Price">
                 <br>
-                <button type="button" class="btn btn-primary" id="addNewGoods">Add</button>
+                <button type="button" class="btn btn-primary" id="add">Add</button>
+                <button type="button" class="btn btn-primary" id="update" style="display: none">Edit</button>
+                <button type="button" class="btn btn-primary" id="cancel" style="display: none">Cancel</button>
             </form>
         </div>
     </div>

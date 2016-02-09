@@ -3,105 +3,60 @@
  */
 $(document).ready(function(){
 
-//    function getRow (data) {
-////        {name: "name", good_id: 'good_id', price: 'price'};
-//
-//        var string = '<tr>' +
-//        '<td>{{good_id}}</td>'+
-//        '<td>{{name}}</td>' +
-//            '<td>{{price}}</td>' +
-//        '<td>' +
-//        '<button class="btn btn-default" data-toggle="modal" data-target="#requestModal">Edit</button>' +
-//        '<a href="delete/{{good_id}}">Delete</a>' +
-//        '</td>' +
-//        '</tr>';
-//
-//        string = string.replace('{{good_id}}', data.good_id);
-//        string = string.replace('{{name}}', data.name);
-//        string = string.replace('{{price}}', data.price);
-//
-//        return string;
-//    }
-
-    $('#addNewGoods').click(function(){
-
-//        var good_id = parseInt($('#newId').val());
+    $('#add').click(function(){
         var name = $('#newName').val();
         var price = parseInt($('#newPrice').val());
-
-        $.ajax({
-            type: "POST",
-            url: 'addNewGoods',
-            contentType: "application/json",
-            dataType: "text",
-            data: JSON.stringify({"name": name, "price": price}),
-            success: function(data) {
-                $('#tableBody').empty().append($(data));
-//                $('#main-table').append(getRow(data));
-            },
-            error: function (req, message) {
-                $('#tableBody').append("Error!");
-//                var data = {good_id: good_id, name: name, price: price};
-//                $('#main-table').append(getRow(data));
-            }
-        });
+        sendAjax('add', JSON.stringify({"name": name, "price": price}), 'POST');
     });
+
+    $('#tableBody .js-edit').click(function() {
+        var name = $(this).closest('tr').find('.name').html();
+        var price = $(this).closest('tr').find('.price').html();
+        var id = $(this).closest('tr').find('.goodId').html();
+        $('#add').hide();
+        $('#update').show();
+        $('#cancel').show();
+        $('#newName').val(name);
+        $('#newPrice').val(price);
+        $('#newGoodId').val(id);
+    });
+
+    $('#cancel').click(function() {
+        $('#add').show();
+        $('#update').hide();
+        $('#cancel').hide();
+        $('#newName').val('');
+        $('#newPrice').val('');
+    });
+
 
     $('#update').click(function() {
+        var editNewName = $('#newName').val();
+        var editNewPrice = parseInt($('#newPrice').val());
+        var id = parseInt($('#newGoodId').val());
+        sendAjax('update', JSON.stringify({"goodId": id,  "name": editNewName, "price": editNewPrice}), 'POST');
 
-        var good_id = parseInt($('#newId').val());
-        var editNewName = $('#editName').val();
-        var editNewPrice = parseInt($('#editPrice').val());
-        $.ajax({
-            type: "POST",
-            url: 'update',
-            contentType: "application/json",
-            dataType: "text",
-//            processData: false,
-            data: JSON.stringify({"good_id": good_id, "name": editNewName, "price": editNewPrice}),
-            success: function (updatedData) {
-                $('#tableBody').empty().append($(updatedData));
-//                var $row = $('#good-' + updatedData.good_id);
-//                $row.find('.name').val(updatedData.name);
-//                $row.find('.price').val(updatedData.price);
-            },
-            error: function (req, message) {
-                $('#tableBody').append("Error!");
-//                $('#main-table').append("Error!");
-            }
-        });
-        $('#requestModal').modal('toggle');
     });
 
-    $('#delete').click(function() {
-        var id = 0 ;
-        $.ajax({
-            type: "DELETE",
-            url: '/delete',
-            contentType: "application/json",
-            dataType: "text",
-            data: JSON.stringify({"good_id": id}),
-            success: function() {
-
-            },
-            error: function (req, message) {
-
-            }
-        });
+    $('#tableBody .js-delete').click(function() {
+        var id = $(this).closest('tr').find('.goodId').html();
+        sendAjax('delete', JSON.stringify({"goodId": id}), 'POST');
     });
 
     $('#getByFilter').click(function() {
-
         var selectPriceFrom = parseInt($('#priceFrom').val());
         var selectPriceTo = parseInt($('#priceTo').val());
         var selectByName = $('#selectName').val();
+        sendAjax('/getByFilter', JSON.stringify({"priceFrom": selectPriceFrom, "priceTo": selectPriceTo, "name": selectByName}), 'POST');
+    });
 
+    function sendAjax(url, data, method) {
         $.ajax({
-            type: "POST",
-            url: '/getByFilter',
+            type: method,
+            url: url,
             contentType: "application/json",
             dataType: "text",
-            data: JSON.stringify({"priceFrom": selectPriceFrom, "priceTo": selectPriceTo, "name": selectByName}),
+            data: data,
             success: function(data) {
                 $('#tableBody').empty().append($(data));
             },
@@ -109,8 +64,7 @@ $(document).ready(function(){
                 $('#tableBody').append("Error!");
             }
         });
-
-    });
+    }
 
     $('#main-table').on('click', '.edit', function (event) {
         var id = $(this).closest('tr').find('.good_id').text();

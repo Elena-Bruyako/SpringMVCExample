@@ -17,7 +17,7 @@ public class EntityDtoConverter {
             return null;
         }
         Goods goods = new Goods();
-        goods.setGood_id(goodsDto.getGood_id());
+        goods.setGood_id(goodsDto.getGoodId());
         goods.setName(goodsDto.getName());
         goods.setPrice(goodsDto.getPrice());
         return goods;
@@ -30,7 +30,7 @@ public class EntityDtoConverter {
         }
 
         GoodsDto goodsDto = new GoodsDto();
-        goodsDto.setGood_id(goods.getGood_id());
+        goodsDto.setGoodId(goods.getGood_id());
         goodsDto.setName(goods.getName());
         goodsDto.setPrice(goods.getPrice());
 

@@ -7,16 +7,16 @@ import java.io.Serializable;
  */
 public class GoodsDto implements Serializable {
 
-    private int good_id;
+    private int goodId;
     private String name;
     private int price;
 
-    public int getGood_id() {
-        return good_id;
+    public int getGoodId() {
+        return goodId;
     }
 
-    public void setGood_id(int good_id) {
-        this.good_id = good_id;
+    public void setGoodId(int goodId) {
+        this.goodId = goodId;
     }
 
     public String getName() {

@@ -30,15 +30,15 @@ public class MarketServiceTest {
         service = new MarketServiceImpl();
         service.setDao(goodsDaoImpl);
 
-        goodsDtoOne.setGood_id(7);
+        goodsDtoOne.setGoodId(7);
         goodsDtoOne.setName("Xiaomi");
         goodsDtoOne.setPrice(150);
 
-        goodsDtoTwo.setGood_id(8);
+        goodsDtoTwo.setGoodId(8);
         goodsDtoTwo.setName("OneToOne");
         goodsDtoTwo.setPrice(200);
 
-        goodsDtoThree.setGood_id(9);
+        goodsDtoThree.setGoodId(9);
         goodsDtoThree.setName("BlackBerry");
         goodsDtoThree.setPrice(200);
     }
