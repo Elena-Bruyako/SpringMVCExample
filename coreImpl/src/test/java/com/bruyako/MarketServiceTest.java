@@ -58,10 +58,7 @@ public class MarketServiceTest {
 
         verify(goodsDao, times(1)).getAll();
 
-        int counter = 0;
-        for (GoodsDto goodsDto : result) {
-            counter++;
-        }
+        int counter = result.size();
         assertEquals(3, counter);
     }
 
