@@ -12,6 +12,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/resources/core/my-style.css">
+    <link rel="shortcut icon" href="">
     <link rel='stylesheet' type="text/css" href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
     <jsp:useBean id="allGoods" scope="request" type="java.util.List"/>
 </head>
@@ -61,8 +62,8 @@
                 <input type="hidden" class="form-control" id="newGoodId" placeholder="Price">
                 <br>
                 <button type="button" class="btn btn-primary" id="add">Add</button>
-                <button type="button" class="btn btn-primary" id="update" style="display: none">Edit</button>
-                <button type="button" class="btn btn-primary" id="cancel" style="display: none">Cancel</button>
+                <button type="button" class="btn btn-primary" id="update">Edit</button>
+                <button type="button" class="btn btn-primary" id="cancel">Cancel</button>
             </form>
         </div>
     </div>

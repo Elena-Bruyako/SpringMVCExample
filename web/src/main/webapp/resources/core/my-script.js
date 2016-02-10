@@ -54,6 +54,11 @@ $(document).ready(function(){
             + '/'
             + selectByName;
 
+//        if (!selectPriceFrom || !selectPriceTo || !selectByName{
+//
+//        }
+//
+
         sendAjax(url, '', 'GET');
     });
 
@@ -94,5 +99,4 @@ $(document).ready(function(){
         $('#update').show();
         $('#cancel').show();
     }
-
 });

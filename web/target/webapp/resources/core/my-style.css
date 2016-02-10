@@ -29,4 +29,10 @@ div .tableRow {
     padding: 15px;
     width: 250px;
     background: #D3D3D3;
+
+}
+
+.sidebar button#update,
+.sidebar button#cancel{
+    display: none;
 }

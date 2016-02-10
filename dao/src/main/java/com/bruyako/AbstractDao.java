@@ -7,6 +7,6 @@ public interface AbstractDao<T, P> {
 
     void create(T t);
     void update(T t);
-    void delete(P p);
+    void deleteById(P p);
 
 }

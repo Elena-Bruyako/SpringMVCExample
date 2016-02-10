@@ -12,7 +12,7 @@ public class Goods {
     @Id
     @Column(name = "Good_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int good_id;
+    private int goodId;
 
     @Column(name = "Name")
     private String name;
@@ -23,12 +23,12 @@ public class Goods {
     public Goods() {
     }
 
-    public int getGood_id() {
-        return good_id;
+    public int getGoodId() {
+        return goodId;
     }
 
-    public void setGood_id(int good_id) {
-        this.good_id = good_id;
+    public void setGoodId(int goodId) {
+        this.goodId = goodId;
     }
 
     public String getName() {
@@ -54,20 +54,23 @@ public class Goods {
 
         Goods goods = (Goods) o;
 
-        if (good_id != goods.good_id) return false;
+        if (price != goods.price) return false;
+        if (name != null ? !name.equals(goods.name) : goods.name != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return good_id;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + price;
+        return result;
     }
 
     @Override
     public String toString() {
         return "Goods{" +
-                "good_id=" + good_id +
+                "goodId=" + goodId +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';

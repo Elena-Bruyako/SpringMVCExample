@@ -2,11 +2,14 @@ package com.bruyako.impl;
 
 import com.bruyako.GoodsDao;
 import com.bruyako.MarketService;
+import com.bruyako.converter.EntityDtoConverter;
+import com.bruyako.entity.Goods;
 import com.bruyako.model.GoodsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,28 +29,37 @@ public class MarketServiceImpl implements MarketService{
     @Override
     public List<GoodsDto> getAll() {
 
-        return goodsDao.getAll();
+        List<Goods> list = goodsDao.getAll();
+        List<GoodsDto> result = new ArrayList<>(list.size());
+        for (Goods goods : list) {
+            result.add(EntityDtoConverter.convert(goods));
+        }
+        return result;
     }
 
     @Override
     public List<GoodsDto> getByFilter(int priceFrom, int priceTo, String name) {
-        return goodsDao.getByFilter(priceFrom, priceTo, name);
+
+        List<Goods> list = goodsDao.getByFilter(priceFrom, priceTo, name);
+        List<GoodsDto> result = new ArrayList<>(list.size());
+        for (Goods goods : list) {
+            result.add(EntityDtoConverter.convert(goods));
+        }
+        return result;
     }
 
     @Override
     public void create(GoodsDto goodsDto) {
-        goodsDao.create(goodsDto);
+        goodsDao.create(EntityDtoConverter.convert(goodsDto));
     }
 
     @Override
     public void update(GoodsDto goodsDto) {
-        goodsDao.update(goodsDto);
+        goodsDao.update(EntityDtoConverter.convert(goodsDto));
     }
 
     @Override
-    public void delete(Integer id) {
-        goodsDao.delete(id);
+    public void deleteById(Integer id) {
+        goodsDao.deleteById(id);
     }
-
-
 }

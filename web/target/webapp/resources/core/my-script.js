@@ -47,13 +47,28 @@ $(document).ready(function(){
         var selectPriceTo = parseInt($('#priceTo').val());
         var selectByName = $('#selectName').val();
 
+//        var url = '/getByFilter/'
+//            + selectPriceFrom
+//            + '/'
+//            + selectPriceTo
+//            + '/'
+//            + selectByName;
+
+        if (selectPriceFrom == NaN) {
+            selectPriceFrom = '';
+        }
+        if (selectPriceTo == NaN) {
+            selectPriceTo = '';
+        }
+        if (selectByName == null) {
+            selectByName = '';
+        }
         var url = '/getByFilter/'
             + selectPriceFrom
             + '/'
             + selectPriceTo
             + '/'
             + selectByName;
-
         sendAjax(url, '', 'GET');
     });
 
@@ -94,5 +109,4 @@ $(document).ready(function(){
         $('#update').show();
         $('#cancel').show();
     }
-
 });

@@ -1,7 +1,6 @@
 package com.bruyako;
 
 import com.bruyako.model.GoodsDto;
-import com.bruyako.model.GoodsFilterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,6 @@ public class MainController {
         model.addAttribute("allGoods", service.getAll());
         return "market";
     }
-
 
     @RequestMapping(value = "/getByFilter/{priceFrom}/{priceTo}/{name}", method = RequestMethod.GET)
     public String getByFilter(@PathVariable int priceFrom, @PathVariable int priceTo, @PathVariable String name, Model model) {
@@ -53,11 +51,10 @@ public class MainController {
     @RequestMapping(value = "/delete",  method = RequestMethod.POST)
     public String deleteGoods(@RequestBody GoodsDto goodsDto, Model model) {
 
-        service.delete(goodsDto.getGoodId());
+        service.deleteById(goodsDto.getGoodId());
         model.addAttribute("allGoods", service.getAll());
         return "goodsList";
     }
-
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@RequestBody GoodsDto goodsDto, Model model) {

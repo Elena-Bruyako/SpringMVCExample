@@ -1,5 +1,7 @@
 package com.bruyako;
 
+import com.bruyako.converter.EntityDtoConverter;
+import com.bruyako.entity.Goods;
 import com.bruyako.impl.GoodsDaoImpl;
 import com.bruyako.impl.MarketServiceImpl;
 import com.bruyako.model.GoodsDto;
@@ -16,47 +18,45 @@ import java.util.List;
  */
 public class MarketServiceTest {
 
-    GoodsDaoImpl goodsDaoImpl;
-    MarketServiceImpl service;
+    GoodsDaoImpl goodsDao = mock(GoodsDaoImpl.class);
+    MarketServiceImpl service = new MarketServiceImpl();
 
-    GoodsDto goodsDtoOne = new GoodsDto();
-    GoodsDto goodsDtoTwo = new GoodsDto();
-    GoodsDto goodsDtoThree = new GoodsDto();
+    GoodsDto goodsDto1 = new GoodsDto();
+    GoodsDto goodsDto2 = new GoodsDto();
+    GoodsDto goodsDto3 = new GoodsDto();
 
     @Before
     public void init() throws Exception {
 
-        goodsDaoImpl = mock(GoodsDaoImpl.class);
-        service = new MarketServiceImpl();
-        service.setDao(goodsDaoImpl);
+        service.setDao(goodsDao);
 
-        goodsDtoOne.setGoodId(7);
-        goodsDtoOne.setName("Xiaomi");
-        goodsDtoOne.setPrice(150);
+        goodsDto1.setGoodId(7);
+        goodsDto1.setName("Xiaomi");
+        goodsDto1.setPrice(150);
 
-        goodsDtoTwo.setGoodId(8);
-        goodsDtoTwo.setName("OneToOne");
-        goodsDtoTwo.setPrice(200);
+        goodsDto2.setGoodId(8);
+        goodsDto2.setName("OneToOne");
+        goodsDto2.setPrice(200);
 
-        goodsDtoThree.setGoodId(9);
-        goodsDtoThree.setName("BlackBerry");
-        goodsDtoThree.setPrice(200);
+        goodsDto3.setGoodId(9);
+        goodsDto3.setName("BlackBerry");
+        goodsDto3.setPrice(200);
     }
 
     @Test
     public void testGetAllGoods() throws Exception {
 
-        List<GoodsDto> goodsList = new ArrayList<>();
+        List<Goods> goodsList = new ArrayList<>();
 
-        goodsList.add(goodsDtoOne);
-        goodsList.add(goodsDtoTwo);
-        goodsList.add(goodsDtoThree);
+        goodsList.add(EntityDtoConverter.convert(goodsDto1));
+        goodsList.add(EntityDtoConverter.convert(goodsDto2));
+        goodsList.add(EntityDtoConverter.convert(goodsDto3));
 
-        when(goodsDaoImpl.getAll()).thenReturn(goodsList);
+        when(goodsDao.getAll()).thenReturn(goodsList);
 
         List<GoodsDto> result = service.getAll();
 
-        verify(goodsDaoImpl, times(1)).getAll();
+        verify(goodsDao, times(1)).getAll();
 
         int counter = 0;
         for (GoodsDto goodsDto : result) {
@@ -68,22 +68,21 @@ public class MarketServiceTest {
     @Test
     public void testCreate() throws Exception {
 
-        service.create(goodsDtoOne);
-        verify(goodsDaoImpl, times(1)).create(goodsDtoOne);
+        service.create(goodsDto1);
+        verify(goodsDao, times(1)).create(EntityDtoConverter.convert(goodsDto1));
     }
 
     @Test
-    public void testDelete() throws Exception {
+    public void testDeleteById() throws Exception {
 
-        service.delete(1);
-        verify(goodsDaoImpl, times(1)).delete(1);
+        service.deleteById(1);
+        verify(goodsDao, times(1)).deleteById(1);
     }
 
     @Test
     public void testUpdate() throws Exception {
 
-        service.update(goodsDtoOne);
-        verify(goodsDaoImpl, times(1)).update(goodsDtoOne);
+        service.update(goodsDto1);
+        verify(goodsDao, times(1)).update(EntityDtoConverter.convert(goodsDto1));
     }
-
 }

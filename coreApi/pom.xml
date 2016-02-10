@@ -11,5 +11,12 @@
 
     <artifactId>CoreApi</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.bruyako</groupId>
+            <artifactId>Dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
