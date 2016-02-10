@@ -3,6 +3,7 @@ package com.bruyako.impl;
 import com.bruyako.GoodsDao;
 import com.bruyako.entity.Goods;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -61,9 +62,9 @@ public class GoodsDaoImpl implements GoodsDao {
     @Override
     public void deleteById(Long id) {
 
-        Goods goods = new Goods();
-        goods.setGoodId(id);
-        getSession().delete(goods);
+        Query query = getSession().createQuery("delete from Goods g where g.goodId = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
 
     private Session getSession(){

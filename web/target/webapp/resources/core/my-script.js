@@ -47,6 +47,9 @@ $(document).ready(function(){
         var selectPriceTo = parseInt($('#priceTo').val());
         var selectByName = $('#selectName').val();
 
+        selectPriceFrom = selectPriceFrom || 0;
+        selectPriceTo = selectPriceTo || 0;
+
         sendAjax('getByFilter', {"selectPriceFrom": selectPriceFrom, "selectPriceTo": selectPriceTo, "selectByName": selectByName}, 'GET');
     });
 

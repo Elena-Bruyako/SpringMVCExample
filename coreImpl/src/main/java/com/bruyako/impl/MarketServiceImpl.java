@@ -37,7 +37,8 @@ public class MarketServiceImpl implements MarketService{
     public List<GoodsDto> getByFilter(int priceFrom, int priceTo, String name) {
 
         List<Goods> list = goodsDao.getByFilter(priceFrom, priceTo, name);
-        return getList(list);
+        List<GoodsDto> goodsDtoList = getList(list);
+        return goodsDtoList;
     }
 
     @Override
@@ -56,7 +57,9 @@ public class MarketServiceImpl implements MarketService{
     }
 
     private List<GoodsDto> getList(List<Goods> list){
+
         List<GoodsDto> result = new ArrayList<>(list.size());
+
         for (Goods goods : list) {
             result.add(EntityDtoConverter.convert(goods));
         }

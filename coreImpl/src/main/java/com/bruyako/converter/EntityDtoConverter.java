@@ -6,7 +6,7 @@ import com.bruyako.model.GoodsDto;
 /**
  * Created by brunyatko on 03.02.16.
  */
-public class EntityDtoConverter {
+public final class EntityDtoConverter {
 
     private EntityDtoConverter() {
     }
