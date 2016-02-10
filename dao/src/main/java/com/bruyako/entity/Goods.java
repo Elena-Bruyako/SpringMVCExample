@@ -12,7 +12,7 @@ public class Goods {
     @Id
     @Column(name = "Good_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int goodId;
+    private Long goodId;
 
     @Column(name = "Name")
     private String name;
@@ -20,14 +20,11 @@ public class Goods {
     @Column(name = "Price")
     private int price;
 
-    public Goods() {
-    }
-
-    public int getGoodId() {
+    public Long getGoodId() {
         return goodId;
     }
 
-    public void setGoodId(int goodId) {
+    public void setGoodId(Long goodId) {
         this.goodId = goodId;
     }
 

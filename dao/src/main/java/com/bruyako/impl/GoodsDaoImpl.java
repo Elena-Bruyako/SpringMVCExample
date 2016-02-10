@@ -3,11 +3,11 @@ package com.bruyako.impl;
 import com.bruyako.GoodsDao;
 import com.bruyako.entity.Goods;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,14 +23,14 @@ public class GoodsDaoImpl implements GoodsDao {
     @Override
     public List<Goods> getAll() {
 
-        List<Goods> goods = sessionFactory.getCurrentSession().createQuery("from Goods g").list();
+        List<Goods> goods = getSession().createQuery("from Goods g").list();
         return goods;
     }
 
     @Override
     public List<Goods> getByFilter(int priceFrom, int priceTo, String name) {
 
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Goods.class);
+        Criteria criteria = getSession().createCriteria(Goods.class);
 
         if (priceFrom != 0) {
             criteria.add(Restrictions.ge("price", priceFrom));
@@ -48,23 +48,25 @@ public class GoodsDaoImpl implements GoodsDao {
         return goodsList;
     }
 
-    @Transactional(readOnly = false)
     @Override
     public void create(Goods goods) {
-        sessionFactory.getCurrentSession().save(goods);
+        getSession().save(goods);
     }
 
-    @Transactional(readOnly = false)
     @Override
     public void update(Goods goods) {
-        sessionFactory.getCurrentSession().saveOrUpdate(goods);
+        getSession().saveOrUpdate(goods);
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
 
         Goods goods = new Goods();
         goods.setGoodId(id);
-        sessionFactory.getCurrentSession().delete(goods);
+        getSession().delete(goods);
+    }
+
+    private Session getSession(){
+        return sessionFactory.getCurrentSession();
     }
 }

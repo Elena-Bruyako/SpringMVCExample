@@ -30,15 +30,15 @@ public class MarketServiceTest {
 
         service.setDao(goodsDao);
 
-        goodsDto1.setGoodId(7);
+        goodsDto1.setGoodId(7L);
         goodsDto1.setName("Xiaomi");
         goodsDto1.setPrice(150);
 
-        goodsDto2.setGoodId(8);
+        goodsDto2.setGoodId(8L);
         goodsDto2.setName("OneToOne");
         goodsDto2.setPrice(200);
 
-        goodsDto3.setGoodId(9);
+        goodsDto3.setGoodId(9L);
         goodsDto3.setName("BlackBerry");
         goodsDto3.setPrice(200);
     }
@@ -75,8 +75,8 @@ public class MarketServiceTest {
     @Test
     public void testDeleteById() throws Exception {
 
-        service.deleteById(1);
-        verify(goodsDao, times(1)).deleteById(1);
+        service.deleteById(1L);
+        verify(goodsDao, times(1)).deleteById(1L);
     }
 
     @Test

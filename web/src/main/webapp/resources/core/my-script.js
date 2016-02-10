@@ -47,19 +47,7 @@ $(document).ready(function(){
         var selectPriceTo = parseInt($('#priceTo').val());
         var selectByName = $('#selectName').val();
 
-        var url = '/getByFilter/'
-            + selectPriceFrom
-            + '/'
-            + selectPriceTo
-            + '/'
-            + selectByName;
-
-//        if (!selectPriceFrom || !selectPriceTo || !selectByName{
-//
-//        }
-//
-
-        sendAjax(url, '', 'GET');
+        sendAjax('getByFilter', {"selectPriceFrom": selectPriceFrom, "selectPriceTo": selectPriceTo, "selectByName": selectByName}, 'GET');
     });
 
     $('#resetFilter').click(function(){

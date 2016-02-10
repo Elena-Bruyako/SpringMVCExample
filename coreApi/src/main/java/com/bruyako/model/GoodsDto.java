@@ -7,15 +7,15 @@ import java.io.Serializable;
  */
 public class GoodsDto implements Serializable {
 
-    private int goodId;
+    private Long goodId;
     private String name;
     private int price;
 
-    public int getGoodId() {
+    public Long getGoodId() {
         return goodId;
     }
 
-    public void setGoodId(int goodId) {
+    public void setGoodId(Long goodId) {
         this.goodId = goodId;
     }
 

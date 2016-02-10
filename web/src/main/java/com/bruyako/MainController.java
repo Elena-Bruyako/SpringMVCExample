@@ -25,8 +25,8 @@ public class MainController {
         return "market";
     }
 
-    @RequestMapping(value = "/getByFilter/{priceFrom}/{priceTo}/{name}", method = RequestMethod.GET)
-    public String getByFilter(@PathVariable int priceFrom, @PathVariable int priceTo, @PathVariable String name, Model model) {
+    @RequestMapping(value = "/getByFilter", method = RequestMethod.GET)
+    public String getByFilter(@RequestParam("selectPriceFrom") int priceFrom, @RequestParam("selectPriceTo") int priceTo, @RequestParam("selectByName") String name, Model model) {
 
         List<GoodsDto> filterResult = service.getByFilter(priceFrom, priceTo, name);
         model.addAttribute("allGoods", filterResult);

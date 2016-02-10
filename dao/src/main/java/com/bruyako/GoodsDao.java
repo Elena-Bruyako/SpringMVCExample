@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by brunyatko on 03.02.16.
  */
-public interface GoodsDao extends AbstractDao<Goods, Integer>{
+public interface GoodsDao extends AbstractDao<Goods, Long>{
 
     List<Goods> getAll();
     List<Goods> getByFilter(int priceFrom, int priceTo, String name);

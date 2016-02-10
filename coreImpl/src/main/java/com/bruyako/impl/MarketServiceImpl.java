@@ -30,22 +30,14 @@ public class MarketServiceImpl implements MarketService{
     public List<GoodsDto> getAll() {
 
         List<Goods> list = goodsDao.getAll();
-        List<GoodsDto> result = new ArrayList<>(list.size());
-        for (Goods goods : list) {
-            result.add(EntityDtoConverter.convert(goods));
-        }
-        return result;
+        return getList(list);
     }
 
     @Override
     public List<GoodsDto> getByFilter(int priceFrom, int priceTo, String name) {
 
         List<Goods> list = goodsDao.getByFilter(priceFrom, priceTo, name);
-        List<GoodsDto> result = new ArrayList<>(list.size());
-        for (Goods goods : list) {
-            result.add(EntityDtoConverter.convert(goods));
-        }
-        return result;
+        return getList(list);
     }
 
     @Override
@@ -59,7 +51,15 @@ public class MarketServiceImpl implements MarketService{
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         goodsDao.deleteById(id);
+    }
+
+    private List<GoodsDto> getList(List<Goods> list){
+        List<GoodsDto> result = new ArrayList<>(list.size());
+        for (Goods goods : list) {
+            result.add(EntityDtoConverter.convert(goods));
+        }
+        return result;
     }
 }

@@ -11,7 +11,7 @@ public interface MarketService {
 
     List<GoodsDto> getAll();
     List<GoodsDto> getByFilter(int priceFrom, int priceTo, String name);
-    public void create(GoodsDto goodsDto);
-    public void update(GoodsDto goodsDto);
-    public void deleteById(Integer id);
+    void create(GoodsDto goodsDto);
+    void update(GoodsDto goodsDto);
+    void deleteById(Long id);
 }
