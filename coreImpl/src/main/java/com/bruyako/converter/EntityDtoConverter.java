@@ -8,9 +8,6 @@ import com.bruyako.model.GoodsDto;
  */
 public final class EntityDtoConverter {
 
-    private EntityDtoConverter() {
-    }
-
     public static Goods convert(GoodsDto goodsDto) {
 
         if (goodsDto == null) {
