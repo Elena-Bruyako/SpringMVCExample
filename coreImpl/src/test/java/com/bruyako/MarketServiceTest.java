@@ -27,6 +27,10 @@ public class MarketServiceTest {
     GoodsDto goodsDto2 = new GoodsDto();
     GoodsDto goodsDto3 = new GoodsDto();
 
+    public int priceFrom;
+    public int priceTo;
+    public String name;
+
     @Before
     public void init() throws Exception {
 
@@ -49,6 +53,45 @@ public class MarketServiceTest {
         List<GoodsDto> result = service.getAll();
         verify(goodsDao, times(1)).getAll();
         assertEquals(3, result.size());
+    }
+
+    @Test
+    public void testGetByFilter() throws Exception {
+
+        List<GoodsDto> list1 = new ArrayList<>();
+        list1.add(goodsDto1);
+        list1.add(goodsDto2);
+        list1.add(goodsDto3);
+
+        List<GoodsDto> list2 = new ArrayList<>();
+        list2.add(goodsDto2);
+        list2.add(goodsDto3);
+
+        List<GoodsDto> list3 = new ArrayList<>();
+        list3.add(goodsDto2);
+        list3.add(goodsDto3);
+
+        List<GoodsDto> list4 = new ArrayList<>();
+        list4.add(goodsDto1);
+        list4.add(goodsDto3);
+
+        List<GoodsDto> list5 = new ArrayList<>();
+        list5.add(goodsDto1);
+
+        List<GoodsDto> list6 = new ArrayList<>();
+        list6.add(goodsDto2);
+
+        List<GoodsDto> list7 = new ArrayList<>();
+        list7.add(goodsDto3);
+
+        assertEquals(list1, service.getByFilter(100, 500, null));
+        assertEquals(list2, service.getByFilter(0, 200, null));
+        assertEquals(list3, service.getByFilter(priceFrom, priceTo, name));
+        assertEquals(list4, service.getByFilter(priceFrom, priceTo, name));
+        assertEquals(list4, service.getByFilter(priceFrom, priceTo, name));
+        assertEquals(list5, service.getByFilter(priceFrom, priceTo, name));
+        assertEquals(list6, service.getByFilter(priceFrom, priceTo, name));
+        assertEquals(list7, service.getByFilter(priceFrom, priceTo, name));
     }
 
     @Test
