@@ -8,6 +8,7 @@ import com.bruyako.model.GoodsDto;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -23,13 +24,9 @@ public class MarketServiceTest {
     GoodsDaoImpl goodsDao = mock(GoodsDaoImpl.class);
     MarketServiceImpl service = new MarketServiceImpl();
 
-    GoodsDto goodsDto1 = new GoodsDto();
-    GoodsDto goodsDto2 = new GoodsDto();
-    GoodsDto goodsDto3 = new GoodsDto();
-
-    public int priceFrom;
-    public int priceTo;
-    public String name;
+    GoodsDto goodsDto1;
+    GoodsDto goodsDto2;
+    GoodsDto goodsDto3;
 
     @Before
     public void init() throws Exception {
@@ -56,45 +53,6 @@ public class MarketServiceTest {
     }
 
     @Test
-    public void testGetByFilter() throws Exception {
-
-        List<GoodsDto> list1 = new ArrayList<>();
-        list1.add(goodsDto1);
-        list1.add(goodsDto2);
-        list1.add(goodsDto3);
-
-        List<GoodsDto> list2 = new ArrayList<>();
-        list2.add(goodsDto2);
-        list2.add(goodsDto3);
-
-        List<GoodsDto> list3 = new ArrayList<>();
-        list3.add(goodsDto2);
-        list3.add(goodsDto3);
-
-        List<GoodsDto> list4 = new ArrayList<>();
-        list4.add(goodsDto1);
-        list4.add(goodsDto3);
-
-        List<GoodsDto> list5 = new ArrayList<>();
-        list5.add(goodsDto1);
-
-        List<GoodsDto> list6 = new ArrayList<>();
-        list6.add(goodsDto2);
-
-        List<GoodsDto> list7 = new ArrayList<>();
-        list7.add(goodsDto3);
-
-        assertEquals(list1, service.getByFilter(100, 500, null));
-        assertEquals(list2, service.getByFilter(0, 200, null));
-        assertEquals(list3, service.getByFilter(priceFrom, priceTo, name));
-        assertEquals(list4, service.getByFilter(priceFrom, priceTo, name));
-        assertEquals(list4, service.getByFilter(priceFrom, priceTo, name));
-        assertEquals(list5, service.getByFilter(priceFrom, priceTo, name));
-        assertEquals(list6, service.getByFilter(priceFrom, priceTo, name));
-        assertEquals(list7, service.getByFilter(priceFrom, priceTo, name));
-    }
-
-    @Test
     public void testCreate() throws Exception {
 
         service.create(goodsDto1);
@@ -116,12 +74,74 @@ public class MarketServiceTest {
         verify(goodsDao, times(1)).update(EntityDtoConverter.convert(goodsDto1));
     }
 
-    private GoodsDto initDto(long id, String name, int price) {
+    @Test
+    public void testGetByFilterAllParams() throws Exception {
 
+        List<Goods> goodsFilterList = new ArrayList<Goods>();
+        goodsFilterList.add(initDao(7L, "Xiaomi", 200));
+        goodsFilterList.add(initDao(8L, "OneToOne", 300));
+        when(goodsDao.getByFilter(200, 300, "o")).thenReturn(goodsFilterList);
+
+        List<GoodsDto> filterResult = service.getByFilter(200, 300, "o");
+        isSameContent(goodsFilterList, filterResult);
+    }
+
+    @Test
+    public void testGetByFilterMinPrice() throws Exception {
+
+        List<Goods> goodsFilterList = new ArrayList<Goods>();
+        goodsFilterList.add(initDao(7L, "Xiaomi", 200));
+        when(goodsDao.getByFilter(200, 0, null)).thenReturn(goodsFilterList);
+
+        List<GoodsDto> filterResult = service.getByFilter(200, 0, null);
+        isSameContent(goodsFilterList, filterResult);
+    }
+
+    @Test
+    public void testGetByFilterMaxPrice() throws Exception {
+
+        List<Goods> goodsFilterList = new ArrayList<Goods>();
+        goodsFilterList.add(initDao(7L, "Xiaomi", 200));
+        when(goodsDao.getByFilter(0, 200, null)).thenReturn(goodsFilterList);
+
+        List<GoodsDto> filterResult = service.getByFilter(0, 200, null);
+        isSameContent(goodsFilterList, filterResult);
+    }
+
+    @Test
+    public void testGetByFilterName() throws Exception {
+
+        List<Goods> goodsFilterList = new ArrayList<Goods>();
+        goodsFilterList.add(initDao(7L, "Xiaomi", 200));
+        when(goodsDao.getByFilter(0, 0, "Xi")).thenReturn(goodsFilterList);
+
+        List<GoodsDto> filterResult = service.getByFilter(0, 0, "Xi");
+        isSameContent(goodsFilterList, filterResult);
+    }
+
+    private GoodsDto initDto(long id, String name, int price) {
         GoodsDto goodsDto = new GoodsDto();
         goodsDto.setGoodId(id);
         goodsDto.setName(name);
         goodsDto.setPrice(price);
         return goodsDto;
+    }
+
+    private Goods initDao(long id, String name, int price) {
+        Goods goods = new Goods();
+        goods.setGoodId(id);
+        goods.setName(name);
+        goods.setPrice(price);
+        return goods;
+    }
+
+    private void isSameContent(List<Goods> goodsDao,  List<GoodsDto> goodsDto){
+        assertTrue(goodsDao.size() == goodsDto.size());
+
+        for(int i = 0; i < goodsDao.size(); i++){
+            assertEquals(goodsDto.get(i).getGoodId(), goodsDao.get(i).getGoodId());
+            assertEquals(goodsDto.get(i).getName(), goodsDao.get(i).getName());
+            assertEquals(goodsDto.get(i).getPrice(), goodsDao.get(i).getPrice());
+        }
     }
 }

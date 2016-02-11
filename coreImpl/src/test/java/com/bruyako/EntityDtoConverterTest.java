@@ -26,8 +26,8 @@ public class EntityDtoConverterTest {
 
         Goods goods = EntityDtoConverter.convert(goodsDto);
 
-        assertNotNull(goodsDto);
-//        assertFalse(goodsDto.equals(null));
+        assertNotNull(goods);
+        assertNotNull(goods.getName());
         assertEquals(goodsDto.getGoodId(), goods.getGoodId());
         assertEquals(goodsDto.getName(), goods.getName());
         assertEquals(goodsDto.getPrice(), goods.getPrice());
@@ -43,8 +43,8 @@ public class EntityDtoConverterTest {
 
         GoodsDto goodsDto = EntityDtoConverter.convert(goods);
 
-        assertNotNull(goods);
-//        assertFalse(goods.equals(null));
+        assertNotNull(goodsDto);
+        assertNotNull(goodsDto.getName());
         assertEquals(goodsDto.getGoodId(), goods.getGoodId());
         assertEquals(goodsDto.getName(), goods.getName());
         assertEquals(goodsDto.getPrice(), goods.getPrice());
