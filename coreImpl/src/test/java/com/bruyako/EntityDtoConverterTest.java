@@ -12,9 +12,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class EntityDtoConverterTest {
 
-    private long id = 7L;
-    private String name = "Xiaomi";
-    private int price = 150;
+    private static final long id = 7L;
+    private static final String name = "Xiaomi";
+    private static final int price = 150;
 
     @Test
     public void testConvertToDao() throws Exception  {
