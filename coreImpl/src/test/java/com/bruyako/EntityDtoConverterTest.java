@@ -3,7 +3,6 @@ package com.bruyako;
 import com.bruyako.converter.EntityDtoConverter;
 import com.bruyako.entity.Goods;
 import com.bruyako.model.GoodsDto;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,41 +12,37 @@ import static org.junit.Assert.assertEquals;
  */
 public class EntityDtoConverterTest {
 
-    Goods goods = new Goods();
-    GoodsDto goodsDto = new GoodsDto();
-
-    @Before
-    public void init() throws Exception {
-
-        goods = initDao(7L, "Xiaomi", 150);
-        goodsDto = initDto(7L, "Xiaomi", 150);
-    }
+    private long id = 7L;
+    private String name = "Xiaomi";
+    private int price = 150;
 
     @Test
     public void testConvertToDao() throws Exception  {
-        assertEquals(goods, EntityDtoConverter.convert(goodsDto));
-    }
-
-    @Test
-    public void testConvertToDto() throws Exception  {
-        assertEquals(goodsDto, EntityDtoConverter.convert(goods));
-    }
-
-    private GoodsDto initDto(long id, String name, int price) {
 
         GoodsDto goodsDto = new GoodsDto();
         goodsDto.setGoodId(id);
         goodsDto.setName(name);
         goodsDto.setPrice(price);
-        return goodsDto;
+
+        Goods goods = EntityDtoConverter.convert(goodsDto);
+
+        assertEquals(goodsDto.getGoodId(), goods.getGoodId());
+        assertEquals(goodsDto.getName(), goods.getName());
+        assertEquals(goodsDto.getPrice(), goods.getPrice());
     }
 
-    private Goods initDao(long id, String name, int price) {
+    @Test
+    public void testConvertToDto() throws Exception  {
 
         Goods goods = new Goods();
         goods.setGoodId(id);
         goods.setName(name);
         goods.setPrice(price);
-        return goods;
+
+        GoodsDto goodsDto = EntityDtoConverter.convert(goods);
+
+        assertEquals(goodsDto.getGoodId(), goods.getGoodId());
+        assertEquals(goodsDto.getName(), goods.getName());
+        assertEquals(goodsDto.getPrice(), goods.getPrice());
     }
 }

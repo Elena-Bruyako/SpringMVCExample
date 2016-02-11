@@ -12,7 +12,6 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by brunyatko on 04.02.16.
@@ -100,5 +99,4 @@ public class MarketServiceTest {
         goodsDto.setPrice(price);
         return goodsDto;
     }
-
 }
