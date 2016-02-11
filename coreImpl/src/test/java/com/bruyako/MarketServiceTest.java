@@ -74,16 +74,16 @@ public class MarketServiceTest {
     @Test
     public void testGetByFilter() throws Exception {
 
-        assertEquals(expected, service.getByFilter(300, 500, "a"));
-        assertEquals(expected, service.getByFilter(0, 0, "T"));
-        assertEquals(expected, service.getByFilter(150, 0, ""));
-        assertEquals(expected, service.getByFilter(300, 500, ""));
+        assertEquals(expected, service.getByFilter(priceFrom, priceTo, name));
     }
 
     @Parameterized.Parameters
     public static Collection data() {
         return Arrays.asList(new Object[][] {
-                { priceFrom, priceTo, name, expected}
+                {300, 500, "a", expected},
+                {0, 0, "T", expected},
+                {150, 0, "", expected},
+                {300, 500, "", expected},
         });
     }
 
@@ -109,7 +109,7 @@ public class MarketServiceTest {
         verify(goodsDao, times(1)).update(EntityDtoConverter.convert(goodsDto1));
     }
 
-    private static GoodsDto initDto(long id, String name, int price) {
+    private GoodsDto initDto(long id, String name, int price) {
 
         GoodsDto goodsDto = new GoodsDto();
         goodsDto.setGoodId(id);
