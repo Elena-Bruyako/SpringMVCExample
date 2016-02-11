@@ -37,8 +37,7 @@ public class MarketServiceImpl implements MarketService{
     public List<GoodsDto> getByFilter(int priceFrom, int priceTo, String name) {
 
         List<Goods> list = goodsDao.getByFilter(priceFrom, priceTo, name);
-        List<GoodsDto> goodsDtoList = getList(list);
-        return goodsDtoList;
+        return getList(list);
     }
 
     @Override

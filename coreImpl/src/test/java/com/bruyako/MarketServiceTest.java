@@ -12,6 +12,7 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by brunyatko on 04.02.16.
@@ -29,18 +30,9 @@ public class MarketServiceTest {
     public void init() throws Exception {
 
         service.setDao(goodsDao);
-
-        goodsDto1.setGoodId(7L);
-        goodsDto1.setName("Xiaomi");
-        goodsDto1.setPrice(150);
-
-        goodsDto2.setGoodId(8L);
-        goodsDto2.setName("OneToOne");
-        goodsDto2.setPrice(200);
-
-        goodsDto3.setGoodId(9L);
-        goodsDto3.setName("BlackBerry");
-        goodsDto3.setPrice(200);
+        goodsDto1 = initDto(7L, "Xiaomi", 150);
+        goodsDto2 = initDto(8L, "OneToOne", 200);
+        goodsDto3 = initDto(9L, "BlackBerry", 360);
     }
 
     @Test
@@ -63,6 +55,22 @@ public class MarketServiceTest {
     }
 
     @Test
+    public void testGetByFilter() throws Exception {
+
+        int priceFrom = 200;
+        int priceTo = 400;
+        String name = "a";
+        List<Goods> goodsList = new ArrayList<>();
+        goodsList.add(EntityDtoConverter.convert(goodsDto3));
+        when(goodsDao.getByFilter(priceFrom, priceTo, name)).thenReturn(goodsList);
+
+        List<GoodsDto> result = service.getByFilter(priceFrom, priceTo, name);
+        verify(goodsDao, times(1)).getByFilter(priceFrom, priceTo, name);
+        int counter = result.size();
+        assertEquals(1, counter);
+    }
+
+    @Test
     public void testCreate() throws Exception {
 
         service.create(goodsDto1);
@@ -72,8 +80,9 @@ public class MarketServiceTest {
     @Test
     public void testDeleteById() throws Exception {
 
-        service.deleteById(1L);
-        verify(goodsDao, times(1)).deleteById(1L);
+        long id = 7L;
+        service.deleteById(id);
+        verify(goodsDao, times(1)).deleteById(id);
     }
 
     @Test
@@ -82,4 +91,14 @@ public class MarketServiceTest {
         service.update(goodsDto1);
         verify(goodsDao, times(1)).update(EntityDtoConverter.convert(goodsDto1));
     }
+
+    private GoodsDto initDto(long id, String name, int price) {
+
+        GoodsDto goodsDto = new GoodsDto();
+        goodsDto.setGoodId(id);
+        goodsDto.setName(name);
+        goodsDto.setPrice(price);
+        return goodsDto;
+    }
+
 }

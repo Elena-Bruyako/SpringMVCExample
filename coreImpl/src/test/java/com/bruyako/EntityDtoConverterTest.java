@@ -24,39 +24,44 @@ public class EntityDtoConverterTest {
     @Before
     public void init() throws Exception {
 
-        goods1.setGoodId(7L);
-        goods1.setName("Xiaomi");
-        goods1.setPrice(150);
+        goods1 = initDao(7L, "Xiaomi", 150);
+        goods2 = initDao(8L, "OneToOne", 200);
+        goods3 = initDao(9L, "BlackBerry", 360);
 
-        goods2.setGoodId(8L);
-        goods2.setName("OneToOne");
-        goods2.setPrice(200);
-
-        goods3.setGoodId(9L);
-        goods3.setName("BlackBerry");
-        goods3.setPrice(200);
-
-        goodsDto1.setGoodId(7L);
-        goodsDto1.setName("Xiaomi");
-        goodsDto1.setPrice(150);
-
-        goodsDto2.setGoodId(8L);
-        goodsDto2.setName("OneToOne");
-        goodsDto2.setPrice(200);
-
-        goodsDto3.setGoodId(9L);
-        goodsDto3.setName("BlackBerry");
-        goodsDto3.setPrice(200);
+        goodsDto1 = initDto(7L, "Xiaomi", 150);
+        goodsDto2 = initDto(8L, "OneToOne", 200);
+        goodsDto3 = initDto(9L, "BlackBerry", 360);
     }
 
     @Test
-    public void testConvert() throws Exception  {
+    public void testConvertToDao() throws Exception  {
 
-        EntityDtoConverter converter = new EntityDtoConverter();
+        assertEquals(goods1, EntityDtoConverter.convert(goodsDto1));
+        assertEquals(goodsDto1, EntityDtoConverter.convert(goods1));
+    }
 
-        assertEquals(goods1, converter.convert(goodsDto1));
-        assertEquals(goods2, converter.convert(goodsDto2));
-        assertEquals(goodsDto2, converter.convert(goods2));
-        assertEquals(goodsDto1, converter.convert(goods1));
+    @Test
+    public void testConvertToDto() throws Exception  {
+
+        assertEquals(goods2, EntityDtoConverter.convert(goodsDto2));
+        assertEquals(goodsDto2, EntityDtoConverter.convert(goodsDto2));
+    }
+
+    private GoodsDto initDto(long id, String name, int price) {
+
+        GoodsDto goodsDto = new GoodsDto();
+        goodsDto.setGoodId(id);
+        goodsDto.setName(name);
+        goodsDto.setPrice(price);
+        return goodsDto;
+    }
+
+    private Goods initDao(long id, String name, int price) {
+
+        Goods goods = new Goods();
+        goods.setGoodId(id);
+        goods.setName(name);
+        goods.setPrice(price);
+        return goods;
     }
 }
