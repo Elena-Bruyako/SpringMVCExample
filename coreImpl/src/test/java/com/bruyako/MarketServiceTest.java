@@ -7,22 +7,17 @@ import com.bruyako.impl.MarketServiceImpl;
 import com.bruyako.model.GoodsDto;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by brunyatko on 04.02.16.
  */
-@RunWith(value = Parameterized.class)
 public class MarketServiceTest {
 
     GoodsDaoImpl goodsDao = mock(GoodsDaoImpl.class);
@@ -31,18 +26,6 @@ public class MarketServiceTest {
     GoodsDto goodsDto1 = new GoodsDto();
     GoodsDto goodsDto2 = new GoodsDto();
     GoodsDto goodsDto3 = new GoodsDto();
-
-    private static int priceFrom;
-    private static int priceTo;
-    private static String name;
-    private static List<GoodsDto> expected = new ArrayList<>();
-
-    public MarketServiceTest(int priceFrom, int priceTo, String name, List<GoodsDto> expected) {
-        this.priceFrom = priceFrom;
-        this.priceTo = priceTo;
-        this.name = name;
-        this.expected = expected;
-    }
 
     @Before
     public void init() throws Exception {
@@ -56,35 +39,16 @@ public class MarketServiceTest {
     @Test
     public void testGetAllGoods() throws Exception {
 
-        List<Goods> goodsList = new ArrayList<Goods>();
+        List<Goods> goodsList = new ArrayList<>();
 
         goodsList.add(EntityDtoConverter.convert(goodsDto1));
         goodsList.add(EntityDtoConverter.convert(goodsDto2));
         goodsList.add(EntityDtoConverter.convert(goodsDto3));
 
         when(goodsDao.getAll()).thenReturn(goodsList);
-
         List<GoodsDto> result = service.getAll();
-
         verify(goodsDao, times(1)).getAll();
-
         assertEquals(3, result.size());
-    }
-
-    @Test
-    public void testGetByFilter() throws Exception {
-
-        assertEquals(expected, service.getByFilter(priceFrom, priceTo, name));
-    }
-
-    @Parameterized.Parameters
-    public static Collection data() {
-        return Arrays.asList(new Object[][] {
-                {300, 500, "a", expected},
-                {0, 0, "T", expected},
-                {150, 0, "", expected},
-                {300, 500, "", expected},
-        });
     }
 
     @Test
