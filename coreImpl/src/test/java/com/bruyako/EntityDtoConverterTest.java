@@ -13,38 +13,24 @@ import static org.junit.Assert.assertEquals;
  */
 public class EntityDtoConverterTest {
 
-    Goods goods1 = new Goods();
-    Goods goods2 = new Goods();
-    Goods goods3 = new Goods();
-
-    GoodsDto goodsDto1 = new GoodsDto();
-    GoodsDto goodsDto2 = new GoodsDto();
-    GoodsDto goodsDto3 = new GoodsDto();
+    Goods goods = new Goods();
+    GoodsDto goodsDto = new GoodsDto();
 
     @Before
     public void init() throws Exception {
 
-        goods1 = initDao(7L, "Xiaomi", 150);
-        goods2 = initDao(8L, "OneToOne", 200);
-        goods3 = initDao(9L, "BlackBerry", 360);
-
-        goodsDto1 = initDto(7L, "Xiaomi", 150);
-        goodsDto2 = initDto(8L, "OneToOne", 200);
-        goodsDto3 = initDto(9L, "BlackBerry", 360);
+        goods = initDao(7L, "Xiaomi", 150);
+        goodsDto = initDto(7L, "Xiaomi", 150);
     }
 
     @Test
     public void testConvertToDao() throws Exception  {
-
-        assertEquals(goods1, EntityDtoConverter.convert(goodsDto1));
-        assertEquals(goodsDto1, EntityDtoConverter.convert(goods1));
+        assertEquals(goods, EntityDtoConverter.convert(goodsDto));
     }
 
     @Test
     public void testConvertToDto() throws Exception  {
-
-        assertEquals(goods2, EntityDtoConverter.convert(goodsDto2));
-        assertEquals(goodsDto2, EntityDtoConverter.convert(goodsDto2));
+        assertEquals(goodsDto, EntityDtoConverter.convert(goods));
     }
 
     private GoodsDto initDto(long id, String name, int price) {
