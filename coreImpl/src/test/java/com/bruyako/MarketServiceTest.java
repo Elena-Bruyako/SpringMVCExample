@@ -7,15 +7,22 @@ import com.bruyako.impl.MarketServiceImpl;
 import com.bruyako.model.GoodsDto;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by brunyatko on 04.02.16.
  */
+@RunWith(value = Parameterized.class)
 public class MarketServiceTest {
 
     GoodsDaoImpl goodsDao = mock(GoodsDaoImpl.class);
@@ -24,6 +31,18 @@ public class MarketServiceTest {
     GoodsDto goodsDto1 = new GoodsDto();
     GoodsDto goodsDto2 = new GoodsDto();
     GoodsDto goodsDto3 = new GoodsDto();
+
+    private static int priceFrom;
+    private static int priceTo;
+    private static String name;
+    private static List<GoodsDto> expected = new ArrayList<>();
+
+    public MarketServiceTest(int priceFrom, int priceTo, String name, List<GoodsDto> expected) {
+        this.priceFrom = priceFrom;
+        this.priceTo = priceTo;
+        this.name = name;
+        this.expected = expected;
+    }
 
     @Before
     public void init() throws Exception {
@@ -37,7 +56,7 @@ public class MarketServiceTest {
     @Test
     public void testGetAllGoods() throws Exception {
 
-        List<Goods> goodsList = new ArrayList<>();
+        List<Goods> goodsList = new ArrayList<Goods>();
 
         goodsList.add(EntityDtoConverter.convert(goodsDto1));
         goodsList.add(EntityDtoConverter.convert(goodsDto2));
@@ -52,21 +71,21 @@ public class MarketServiceTest {
         assertEquals(3, result.size());
     }
 
-//    @Test
-//    public void testGetByFilter() throws Exception {
+    @Test
+    public void testGetByFilter() throws Exception {
 
-//        int priceFrom = 200;
-//        int priceTo = 400;
-//        String name = "a";
-//        List<Goods> goodsList = new ArrayList<>();
-//        goodsList.add(EntityDtoConverter.convert(goodsDto3));
-//
-//        when(goodsDao.getByFilter(300, 0, "")).thenReturn(goodsList);
-//
-//        List<GoodsDto> result = service.getByFilter(priceFrom, priceTo, name);
-//        verify(goodsDao, times(1)).getByFilter(priceFrom, priceTo, name);
-//        assertEquals(1, result.size());
-//    }
+        assertEquals(expected, service.getByFilter(300, 500, "a"));
+        assertEquals(expected, service.getByFilter(0, 0, "T"));
+        assertEquals(expected, service.getByFilter(150, 0, ""));
+        assertEquals(expected, service.getByFilter(300, 500, ""));
+    }
+
+    @Parameterized.Parameters
+    public static Collection data() {
+        return Arrays.asList(new Object[][] {
+                { priceFrom, priceTo, name, expected}
+        });
+    }
 
     @Test
     public void testCreate() throws Exception {
@@ -90,7 +109,7 @@ public class MarketServiceTest {
         verify(goodsDao, times(1)).update(EntityDtoConverter.convert(goodsDto1));
     }
 
-    private GoodsDto initDto(long id, String name, int price) {
+    private static GoodsDto initDto(long id, String name, int price) {
 
         GoodsDto goodsDto = new GoodsDto();
         goodsDto.setGoodId(id);

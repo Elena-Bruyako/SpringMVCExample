@@ -38,8 +38,8 @@
                     <version>3.3</version>
                     <configuration>
                         <verbose>true</verbose>
-                        <!--<compilerVersion>1.7</compilerVersion>
-                        <fork>true</fork>-->
+                        <!--<compilerVersion>1.8</compilerVersion>-->
+                        <!--<fork>true</fork>&ndash;&gt;-->
                         <source>1.8</source>
                         <target>1.8</target>
                         <maxmem>512m</maxmem>

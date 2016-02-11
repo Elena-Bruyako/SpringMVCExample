@@ -5,7 +5,7 @@ import com.bruyako.entity.Goods;
 import com.bruyako.model.GoodsDto;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Created by brunyatko on 10.02.16.
@@ -26,6 +26,8 @@ public class EntityDtoConverterTest {
 
         Goods goods = EntityDtoConverter.convert(goodsDto);
 
+        assertNotNull(goodsDto);
+//        assertFalse(goodsDto.equals(null));
         assertEquals(goodsDto.getGoodId(), goods.getGoodId());
         assertEquals(goodsDto.getName(), goods.getName());
         assertEquals(goodsDto.getPrice(), goods.getPrice());
@@ -41,6 +43,8 @@ public class EntityDtoConverterTest {
 
         GoodsDto goodsDto = EntityDtoConverter.convert(goods);
 
+        assertNotNull(goods);
+//        assertFalse(goods.equals(null));
         assertEquals(goodsDto.getGoodId(), goods.getGoodId());
         assertEquals(goodsDto.getName(), goods.getName());
         assertEquals(goodsDto.getPrice(), goods.getPrice());
