@@ -7,3 +7,4 @@ Technology stack:
 - Spring
 - Spring MVC
 - Hibernate
+- Mockito
